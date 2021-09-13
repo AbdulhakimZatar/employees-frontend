@@ -1,6 +1,4 @@
 import {
-  Button,
-  ButtonGroup,
   FormControl,
   FormLabel,
   HStack,
@@ -11,34 +9,26 @@ import {
   Stack,
   Center
 } from '@chakra-ui/react'
-import {useState,useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { BsSearch } from 'react-icons/bs'
-import { RiAddFill, RiArrowRightUpLine } from 'react-icons/ri'
 import superagent from 'superagent'
 
 
 
 
-export const TableActions = () => {
+export const TableActions = ({ setSelectedDepartment,setType,setSearch }) => {
   const [departments, setDepartments] = useState([])
-  const [selectedDepartment, setSelectedDepartment] = useState(null)
-  
-  useEffect(() => {
-    getDepartments()
-  }, [])
   
   const getDepartments = async () => {
     const API = 'http://localhost:5000/v1/departments'
     const results = await superagent.get(API)
     setDepartments(results.body.data)
   }
-
-  const Departments =  () => {
   
-    return departments.map(d=>{
-      return <option key={d.id} value={d.id}>{d.name}</option>
-    })
-  }
+  useEffect(() => {
+    getDepartments()
+  }, [])
+
 
   return (
     <Stack
@@ -61,7 +51,7 @@ export const TableActions = () => {
             <InputLeftElement pointerEvents="none" color="gray.400">
               <BsSearch />
             </InputLeftElement>
-            <Input rounded="base" type="search" placeholder="Search" />
+            <Input  onChange={(e)=>{setSearch(e.target.value.length>0?e.target.value:'')}} rounded="base" type="search" placeholder="Search" />
           </InputGroup>
         </FormControl>
         <Select
@@ -71,10 +61,12 @@ export const TableActions = () => {
           }}
           rounded="base"
           size="sm"
+          onChange={(e) => setType(e.target.value)}
+          defaultValue='name'
         >
-          <option value='name' selected='true'>Name</option>
+          <option value='name'>Name</option>
           <option value='email' >Email</option>
-          
+
         </Select>
       </HStack>
       <HStack size="sm" variant="outline">
@@ -88,9 +80,12 @@ export const TableActions = () => {
           }}
           rounded="base"
           size="sm"
+          onChange={(e) => { setSelectedDepartment(e.target.value) }}
         >
-          <option value={null} selected='true'>All departments</option>
-          <Departments />
+          <option value=''>All departments</option>
+          {departments.map(d => {
+            return <option key={d.id} value={d.id}>{d.name}</option>
+          })}
         </Select>
       </HStack>
     </Stack>

@@ -1,5 +1,5 @@
 import {
-  Button,
+  Text,
   Table,
   Tbody,
   Td,
@@ -18,7 +18,7 @@ export const TableContent = (props) => {
   }, [])
 
   return (
-    <Table my="8" borderWidth="1px" fontSize="sm">
+    <Table style={{height:'50vh'}} my="8" borderWidth="1px" fontSize="sm">
       <Thead bg={mode('gray.50', 'gray.800')}>
         <Tr>
           {columns.map((column, index) => (
@@ -30,19 +30,19 @@ export const TableContent = (props) => {
         </Tr>
       </Thead>
       <Tbody>
-        {props.employees.map((row, index) => (
+        {props.employees.length>0?props.employees.map((row, index) => (
           <Tr key={index}>
             {columns.map((column, index) => {
               const cell = row[column.accessor]
               const element = column.Cell?.(row) ?? cell
               return (
-                <Td whiteSpace="nowrap" key={index}>
+                <Td w={index!==0?'30%':'10%'} whiteSpace="wrap" key={index}>
                   {element}
                 </Td>
               )
             })}
           </Tr>
-        ))}
+        )):<Tr></Tr>}
       </Tbody>
     </Table>
   )

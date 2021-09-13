@@ -9,7 +9,6 @@ export const columns = [
     Header: 'Employee',
     accessor: 'name',
     Cell: function MemberCell(data) {
-      console.log(data)
       return <User avatar={data.avatar} name={data.name} />
     },
   },

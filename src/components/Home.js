@@ -1,12 +1,15 @@
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import Main from "./Main";
+import {Box} from '@chakra-ui/react'
 
 function App() {
   return (
     <>
-      <Navbar />
-      <Main />
+      <Box className='content'>
+        <Navbar />
+        <Main />
+      </Box>
       <Footer />
     </>
   );
