@@ -23,10 +23,16 @@ export default function Main() {
 
     return () => clearTimeout(delayDebounceFn)
   }, [search, type])
+  
+    useEffect(() => {
+      if (loading) return
+      getEmployees()
+      setPage(1)
+    }, [selectedDepartment])
 
   useEffect(() => {
     getEmployees()
-  }, [page, selectedDepartment])
+  }, [page])
 
   const getEmployees = async () => {
     setLoading(true)

@@ -49,10 +49,10 @@ export const TableActions = ({ setSelectedDepartment,setType,setSearch }) => {
         >
           <InputGroup size="sm">
             <FormLabel srOnly>Search</FormLabel>
-            <InputLeftElement pointerEvents="none" color="gray.400">
+            <InputLeftElement zIndex={-1} pointerEvents="none" color="gray.400">
               <BsSearch />
             </InputLeftElement>
-            <Input  onChange={(e)=>{setSearch(e.target.value.length>0?e.target.value:'')}} rounded="base" type="search" placeholder="Search" />
+            <Input  onChange={(e)=>{setSearch(e.target.value.length>0?e.target.value.replace(/^\s+/, ''):'')}} rounded="base" type="search" placeholder="Search" />
           </InputGroup>
         </FormControl>
         <Select
@@ -77,7 +77,7 @@ export const TableActions = ({ setSelectedDepartment,setType,setSearch }) => {
         <Select
           w={{
             base: '300px',
-            md: 'unset',
+            md: '200px',
           }}
           rounded="base"
           size="sm"
