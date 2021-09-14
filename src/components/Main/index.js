@@ -12,8 +12,10 @@ export default function Main() {
   const [type, setType] = useState('name')
   const [page, setPage] = useState(1)
   const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    if (loading) return
     const delayDebounceFn = setTimeout(() => {
       getEmployees()
       setPage(1)
@@ -27,11 +29,13 @@ export default function Main() {
   }, [page, selectedDepartment])
 
   const getEmployees = async () => {
+    setLoading(true)
     const API = process.env.REACT_APP_API || 'http://localhost:5000/v1'
     const URL = `${API}/employees?page=${page}&filter=${selectedDepartment}&type=${type}&search=${search}`
     const results = await superagent.get(URL)
     setEmployees(results.body.data)
     setCount(results.body.count)
+    setLoading(false)
   }
 
   return (
@@ -52,7 +56,7 @@ export default function Main() {
             Employees
           </Heading>
           <TableActions setSearch={setSearch} setType={setType} setSelectedDepartment={setSelectedDepartment} />
-          <TableContent getEmployees={getEmployees} employees={employees} />
+          <TableContent loading={loading} getEmployees={getEmployees} employees={employees} />
           <TablePagination page={page} setPage={setPage} count={count} />
         </Box>
       </Box>
