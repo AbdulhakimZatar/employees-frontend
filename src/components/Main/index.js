@@ -30,7 +30,7 @@ export default function Main() {
 
   const getEmployees = async () => {
     setLoading(true)
-    const API = process.env.REACT_APP_API || 'http://localhost:5000/v1'
+    const API = process.env.REACT_APP_API || 'https://calm-beach-41183.herokuapp.com/v1'
     const URL = `${API}/employees?page=${page}&filter=${selectedDepartment}&type=${type}&search=${search}`
     const results = await superagent.get(URL)
     setEmployees(results.body.data)
