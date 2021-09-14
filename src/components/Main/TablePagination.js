@@ -11,8 +11,8 @@ export const TablePagination = ({ count, page, setPage }) => {
         <Button isDisabled={page === 1} onClick={() => { if (page !== 1) setPage(page - 1) }} as="a" rel="prev">
           Previous
         </Button>
-        {<Button as="a" rel="prev">
-          {page}
+        {<Button>
+          {page} of {Math.ceil(count / 5)}
         </Button>}
         <Button isDisabled={Math.ceil(count / 5) === page || count === 0} onClick={(e) => { if (Math.ceil(count / 5) !== page && count !== 0) setPage(page + 1) }} as="a" rel="next">
           Next

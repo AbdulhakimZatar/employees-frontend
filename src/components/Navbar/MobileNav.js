@@ -14,9 +14,8 @@ import { motion } from 'framer-motion'
 import * as React from 'react'
 import FocusLock from 'react-focus-lock'
 import {
-  HiBookOpen,
-  HiCloudDownload,
-  HiCurrencyDollar,
+  HiHome,
+  HiUser,
   HiOutlineMenu,
   HiOutlineX,
   HiQuestionMarkCircle,
@@ -129,7 +128,7 @@ export const MobileNav = () => {
         </RemoveScroll>
         <FocusLock disabled={!show} returnFocus>
           <Box
-            bg={mode('white', 'gray.700')}
+            bg='white'
             shadow="lg"
             rounded="lg"
             ref={ref}
@@ -165,14 +164,13 @@ export const MobileNav = () => {
                   sm: 2,
                 }}
               >
-                <NavLink.Mobile icon={HiCloudDownload}>Product</NavLink.Mobile>
-                <NavLink.Mobile icon={HiCurrencyDollar}>Pricing</NavLink.Mobile>
-                <NavLink.Mobile icon={HiBookOpen}>Resources</NavLink.Mobile>
+                <NavLink.Mobile icon={HiHome}>Home</NavLink.Mobile>
+                <NavLink.Mobile icon={HiUser}>Employees</NavLink.Mobile>
                 <NavLink.Mobile icon={HiQuestionMarkCircle}>Help</NavLink.Mobile>
               </SimpleGrid>
               <VStack mt="8" spacing="4">
                 <Button w="full" colorScheme="blue">
-                  Start Free Trial
+                  Sign up
                 </Button>
                 <Box textAlign="center" fontWeight="medium">
                   Have an account?{' '}
