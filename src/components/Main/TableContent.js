@@ -36,13 +36,13 @@ export const TableContent = (props) => {
               const cell = row[column.accessor]
               const element = column.Cell?.(row) ?? cell
               return (
-                <Td w={index!==0?'30%':'10%'} whiteSpace="wrap" key={index}>
+                <Td w={index!==0?'30%':'10%'} whiteSpace="nowrap" key={index}>
                   {element}
                 </Td>
               )
             })}
           </Tr>
-        )):<Tr></Tr>}
+        )) : <Tr><Td colSpan={columns.length}><Text textAlign='center' fontSize="md">No data found</Text></Td></Tr>}
       </Tbody>
     </Table>
   )

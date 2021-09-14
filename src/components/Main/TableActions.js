@@ -20,8 +20,9 @@ export const TableActions = ({ setSelectedDepartment,setType,setSearch }) => {
   const [departments, setDepartments] = useState([])
   
   const getDepartments = async () => {
-    const API = 'http://localhost:5000/v1/departments'
-    const results = await superagent.get(API)
+    const API = process.env.REACT_APP_API || 'http://localhost:5000/v1'
+    const URL = `${API}/departments`
+    const results = await superagent.get(URL)
     setDepartments(results.body.data)
   }
   

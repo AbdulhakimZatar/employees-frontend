@@ -27,8 +27,9 @@ export default function Main() {
   }, [page, selectedDepartment])
 
   const getEmployees = async () => {
-    const API = `http://localhost:5000/v1/employees?page=${page}&filter=${selectedDepartment}&type=${type}&search=${search}`
-    const results = await superagent.get(API)
+    const API = process.env.REACT_APP_API || 'http://localhost:5000/v1'
+    const URL = `${API}/employees?page=${page}&filter=${selectedDepartment}&type=${type}&search=${search}`
+    const results = await superagent.get(URL)
     setEmployees(results.body.data)
     setCount(results.body.count)
   }

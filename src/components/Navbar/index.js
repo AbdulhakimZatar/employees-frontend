@@ -1,36 +1,65 @@
-import { Box, VisuallyHidden, Img, Flex, useColorModeValue as mode } from '@chakra-ui/react'
+import {
+  Box,
+  Button,
+  Flex,
+  HStack,
+  useColorModeValue as mode,
+  VisuallyHidden,
+} from '@chakra-ui/react'
 import * as React from 'react'
-// import { NavContent } from './NavContent'
+import { Logo } from './Logo'
+import { MobileNav } from './MobileNav'
+import { NavLink } from './NavLink'
 
-export default function Navbar(props) {
+export default function Navbar() {
   return (
-    <Box minHeight='64px' mt='10px' as="header" position="relative" zIndex="10">
-      <Box
-        as="nav"
-        aria-label="Main navigation"
-        maxW="7xl"
-        mx="auto"
-        px={{
-          base: '6',
-          md: '8',
-        }}
-      >
-        <Flex className="nav-content__desktop" align="center" justify="center" {...props}>
-          <Box as="a" href="#" rel="home">
-            <VisuallyHidden>Envelope</VisuallyHidden>
-            <Img
-              // objectFit="cover"
-              // htmlWidth="160px"
-              // htmlHeight="160px"
-              w="10"
-              h="10"
-              alt="Logo"
-              src='https://upload.wikimedia.org/wikipedia/commons/4/47/PricewaterhouseCoopers_Logo.png' />
-          </Box>
-
-
-        </Flex>
+      <Box as="header" bg={mode('white', 'gray.800')} borderBottomWidth="1px">
+        <Box
+          maxW="7xl"
+          mx="auto"
+          py="4"
+          px={{
+            base: '6',
+            md: '8',
+          }}
+        >
+          <Flex as="nav" justify="space-between">
+            <HStack spacing="8">
+              <Box as="a" href="#" rel="home">
+                <VisuallyHidden>Envelope app</VisuallyHidden>
+                <Logo h="6" iconColor="blue.500" />
+              </Box>
+              <HStack
+                display={{
+                  base: 'none',
+                  lg: 'flex',
+                }}
+                spacing="8"
+              >
+                <NavLink.Desktop >Home</NavLink.Desktop>
+                <NavLink.Desktop active>Employees</NavLink.Desktop>
+                <NavLink.Desktop>Help</NavLink.Desktop>
+              </HStack>
+            </HStack>
+            <Flex align="center">
+              <HStack
+                spacing="8"
+                display={{
+                  base: 'none',
+                  md: 'flex',
+                }}
+              >
+                <NavLink.Desktop>Log in </NavLink.Desktop>
+                <Button colorScheme="blue" rounded="full">
+                  Sign up
+                </Button>
+              </HStack>
+              <Box ml="5">
+                <MobileNav />
+              </Box>
+            </Flex>
+          </Flex>
+        </Box>
       </Box>
-    </Box>
   )
 }
